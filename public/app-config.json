@@ -1,0 +1,8 @@
+{
+    "enterpriseLoggingAppId": "",
+    "oAuthAudience": "auth://chrobinson.com",
+    "oAuthClientId": "0oa24vnrh5inyAQ3s0h8",
+    "routerApiUrl": "https://dev-email-api.centralus-external-lin-np-aks.centralus.chrazure.cloud/email-router-api",
+    "productUrl": "https://localhost:3000",
+    "oAuthDomain": "https://chrobinson.oktapreview.com/oauth2/ausm432959XUSGBbK0h7"
+}

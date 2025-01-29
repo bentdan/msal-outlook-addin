@@ -1,0 +1,27 @@
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+#IDEs
+.vscode/
+.idea/
+
+# dependencies
+/node_modules
+
+# testing
+/coverage
+e2e/coverage
+.nyc_output/
+
+# production
+/build
+/dist
+
+# misc
+bower_components
+.DS_Store
+.env
+/.env/*
+!e2e/.env
+
+*.log
+.rpt2_cache

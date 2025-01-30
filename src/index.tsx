@@ -15,10 +15,6 @@ console.log('Configuration loaded:', config);
 let accessToken: string = '';
 
 const getAccessTokenOfficeApi = (): Promise<string> => {
-  if (accessToken) {
-    return Promise.resolve(accessToken);
-  }
-
   console.log('Using office api for auth...');
   return Office.auth.getAccessToken({
     forMSGraphAccess: false,
@@ -26,6 +22,7 @@ const getAccessTokenOfficeApi = (): Promise<string> => {
     allowConsentPrompt: true,
   })
     .then((token) => {
+      console.log('Token retrieved:', token);
       accessToken = token;
       return token;
     })
@@ -69,7 +66,8 @@ const getAccessTokenDialog = (): Promise<string> => {
 
 const authClient : AsyncInterceptorAuthClient = {
   getAccessToken() {
-    return getAccessTokenOfficeApi().catch(() => getAccessTokenDialog());
+    return getAccessTokenOfficeApi();
+    //return getAccessTokenOfficeApi().catch(() => getAccessTokenDialog());
   }
 }
 

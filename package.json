@@ -8,6 +8,7 @@
     "@chr/common-javascript-logging-redux-middleware": "^1.0.19",
     "@chr/common-web-ui-ajax-client": "^3.1.7",
     "@fluentui/react": "^8.120.2",
+    "@vitejs/plugin-react": "^4.3.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-redux": "^8.1.1",
@@ -15,7 +16,9 @@
     "redux-logger": "^3.0.6",
     "redux-observable": "^2.0.0",
     "redux-saga": "1.2.3",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "vite-plugin-static-copy": "^2.2.0",
+    "vite-tsconfig-paths": "^5.1.4"
   },
   "devDependencies": {
     "@playwright/test": "^1.46.0",

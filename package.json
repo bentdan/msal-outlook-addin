@@ -4,7 +4,7 @@
   "private": false,
   "type": "module",
   "dependencies": {
-    "@azure/msal-browser": "^3.23.0",
+    "@azure/msal-browser": "4.0.2",
     "@chr/common-javascript-logging-redux-middleware": "^1.0.19",
     "@chr/common-web-ui-ajax-client": "^3.1.7",
     "@fluentui/react": "^8.120.2",

@@ -46,6 +46,7 @@ const getTokenOfficeApi = (): Promise<string> => {
     allowConsentPrompt: true,
   })
     .then((token) => {
+      console.log('Token retrieved from Office:', token);
       return token;
     })
     .catch((error) => {

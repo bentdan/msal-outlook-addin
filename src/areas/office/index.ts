@@ -1,2 +1,4 @@
+export * from './officeTypes';
 export * from './officeActions';
-export {default as officeReducers} from './officeReducers';
+export * from './outlookMessageRetrievalEpic';
+export {default as officeReducer} from './officeReducer';

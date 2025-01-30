@@ -1,20 +1,12 @@
-declare interface AppConfig {
+import { OfficeState } from './areas/office';
+import { CommonConfig } from '@chr/common-web-ui-configuration';
+
+declare interface AppConfig extends CommonConfig{
   routerApiUrl: string;
 }
 
-declare interface RouterState {
-  currentState?: string;
-  audit?: any; // audit response on get
-  errorMessage?: string;
-}
-
-declare interface OfficeState {
-  isOfficeInitialized: boolean;
-}
-
 declare interface AppState {
-  routerReducers: RouterState;
-  officeReducers: OfficeState;
+  officeReducer: OfficeState;
 }
 
 declare type AppEpic = import('redux-observable').Epic<

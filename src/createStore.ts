@@ -1,10 +1,10 @@
-import { createStore as createReduxStore, applyMiddleware, Action, Middleware, combineReducers } from 'redux';
+import { configureStore, Action, Middleware, combineReducers } from '@reduxjs/toolkit';
 import { createLogger } from 'redux-logger';
 import { createEpicMiddleware, combineEpics } from 'redux-observable';
 import { LoggingMiddleware } from '@chr/common-javascript-logging-redux-middleware';
-import { officeReducers } from './areas/office';
-import { routerEpics } from './areas/router';
+import { officeReducer, outlookMessageRetrievalEpic } from './areas/office';
 import { AjaxClient, AsyncInterceptorAuthClient } from '@chr/common-web-ui-ajax-client';
+import { AppConfig, AppDependencies, AppState } from './react-app-env';
 
 export const createStore = (config: AppConfig, authClient: AsyncInterceptorAuthClient, ajaxClient: AjaxClient) => {
   const epicMiddleware = createEpicMiddleware<Action, Action, AppState, AppDependencies>({
@@ -16,21 +16,23 @@ export const createStore = (config: AppConfig, authClient: AsyncInterceptorAuthC
   });
 
   const rootEpic = combineEpics<Action, Action, AppState, AppDependencies>(
-    routerEpics
+    outlookMessageRetrievalEpic,
   );
 
   const rootReducer = combineReducers({
-    officeReducers,
+    officeReducer,
   });
 
-  const middlewares: Middleware[] = process.env.NODE_ENV === 'production'
-    ? [epicMiddleware, LoggingMiddleware]
-    : [epicMiddleware, LoggingMiddleware, createLogger() as Middleware];
+  // Note: Logging is off test environments due to the amount of logging sometimes being obtrusive. Turn it on if its helpful.
+  const logRedux = process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test';
+  const middlewares: Middleware<{}, any, any>[] = logRedux
+    ? [epicMiddleware as Middleware<{}, any, any>, LoggingMiddleware as Middleware<{}, any, any>, createLogger() as Middleware<{}, any, any>]
+    : [epicMiddleware as Middleware<{}, any, any>, LoggingMiddleware as Middleware<{}, any, any>];
 
-  const store = createReduxStore(
-    rootReducer,
-    applyMiddleware(...middlewares)
-  );
+  const store = configureStore({
+    reducer: rootReducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(middlewares),
+  });
 
   epicMiddleware.run(rootEpic);
 

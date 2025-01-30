@@ -1,19 +1,18 @@
 import * as React from "react";
 import { connect, ConnectedProps } from "react-redux";
+import { AppState } from "src/react-app-env";
 
-interface MainProps extends PropsFromRedux {
-  title: string;
+interface AppProps extends PropsFromRedux {
 }
 
-class Main extends React.Component<MainProps> {
-  constructor(props: MainProps) {
+class App extends React.Component<AppProps> {
+  constructor(props: AppProps) {
     super(props);
   }
 
   render() {
     return (
       <div>
-        <h1>{this.props.title}</h1>
         <p>We are here!</p>
       </div>
     );
@@ -31,4 +30,4 @@ const mapDispatch = {
 const connector = connect(mapState, mapDispatch);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-export default connector(Main);
+export default connector(App);
